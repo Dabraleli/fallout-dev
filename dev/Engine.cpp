@@ -192,15 +192,12 @@ int Engine::MainLoop() {
             }
         }
         if (playing) {            
-           // RenderScene();
             MovePlayer(delta.get_ticks());    
             delta.stop();
             delta.start();
             SDL_Flip(screen);
-            //SDL_Delay(200);
             if (fps.get_ticks() < 1000 / FPS) {
                 SDL_Delay((1000 / FPS) - fps.get_ticks());
-                // cout << fps.get_ticks() << endl;
             }
             SDL_Flip(screen);
         }
@@ -268,7 +265,6 @@ void Engine::CreateLevel() {
 }
 
 void Engine::SetCamera(Entity Ent) {
-    //   cout << "X:" << trunc(Ent.x)  << " Y:" << trunc(Ent.y) << endl;
     camera.x = trunc((Ent.x + dot->w / 2) - screen->w / 2);
     camera.y = trunc((Ent.y + dot->h / 2) - screen->h / 2);
     if (camera.x < 0) {
