@@ -207,9 +207,11 @@ int Engine::MainLoop() {
 void Engine::MovePlayer(Uint32 deltaTicks) {
     float CurrentX = Player.x;
     float CurrentY = Player.y;
-
+  
     int CurrentCellX = Player.x / 32;
-    int CurrentCellY = Player.y / 32;
+    int CurrentCellY = Player.y / 32; 
+    cout << CurrentCellX << ":" << CurrentCellY << endl;
+    
     Player.x = Player.x + Player.xVel * (deltaTicks / 1000.f);
     if(Player.onGround){ 
         if(Map[CurrentCellX][CurrentCellY + 1].isBlock){ 
