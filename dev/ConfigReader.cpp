@@ -21,8 +21,6 @@ ConfigReader::ConfigReader() {
 
 ConfigReader::ConfigReader(Engine * Par){
     Parent = Par;
-    
-    
 }
 
 
