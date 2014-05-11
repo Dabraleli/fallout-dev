@@ -54,6 +54,7 @@ void Engine::HandleInput() {
 }
 
 void Engine::LoadLevel(){
+    srand(time(NULL));
     string LevelName;
     string Material;
     int type1;
@@ -66,6 +67,12 @@ void Engine::LoadLevel(){
             for (int j = 0; j < MapSize; j++) {
                 MapFile >> Material >> type1;
                 Map[i][j] = TCellCreate(Materials[FindMaterialID(Material)], type1, false);
+                int DecoChance = (rand() % 100) - 3;
+                if(DecoChance > 95){
+                    cout << DecoChance << endl;
+                     Map[i][j].isDecorationOn = true;
+                //Map[i][j].Decoration = Decorations[0];
+                }
             }
         }
     }
@@ -219,19 +226,19 @@ void Engine::MovePlayer(Uint32 deltaTicks) {
                Player.y = Player.y - 10;
                Player.yVel = Player.yVel - 10;
                cout << "up" << Player.yVel << endl;
-               SDL_Delay(50);
-               SetCamera(Player);
-               Apply_Surface(round(Player.x - camera.x) + 10, round(Player.y - camera.y) + 10, dot, screen, NULL);
-               SDL_Flip(screen);
-               SDL_Delay(50);
            }
         /*   if(Player.yVel <= 0) {
                Player.y = Player.y + 10;
                cout << "down" << endl;
                
            }
-          */ 
+          */   
+               SetCamera(Player);
+               Apply_Surface(round(Player.x - camera.x) + 10, round(Player.y - camera.y) + 10, dot, screen, NULL);
+               SDL_Flip(screen);
+               
            if(i == 18) Player.onGround = true;
+               SDL_Delay(50); 
            
        } 
        cout << "end" << endl; 
