@@ -12,9 +12,6 @@ const int PLAYER_WIDTH = 20;
 const int PLAYER_HEIGHT = 20;
 const int PLAYER_VEL = 200;
 
-const static string TexturesFolder = "./resources/textures/";
-
-
 Timer delta;
     
 void Engine::Log(string Message) {
@@ -102,7 +99,7 @@ TMaterial Engine::AddNewMaterial(string Name, string FileName) {
     if (IsFileExists(FileName)) {
         Texture = SDL_DisplayFormatAlpha(IMG_Load(FileName.c_str()));
     } else {
-        string DefaultFile = TexturesFolder + "empty.bmp";
+        string DefaultFile = "./resources/textures/empty.bmp";
         Texture = SDL_DisplayFormatAlpha(IMG_Load(DefaultFile.c_str()));
         cerr << "Texture for material \"" << Name << "\" not found. Using default texture" << endl;
 
