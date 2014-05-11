@@ -67,11 +67,11 @@ void Engine::LoadLevel(){
             for (int j = 0; j < MapSize; j++) {
                 MapFile >> Material >> type1;
                 Map[i][j] = TCellCreate(Materials[FindMaterialID(Material)], type1, false);
-                int DecoChance = (rand() % 100) - 3;
+                int DecoChance = (rand() % 100) + 1;
                 if(DecoChance > 95){
                     cout << DecoChance << endl;
-                     Map[i][j].isDecorationOn = true;
-                //Map[i][j].Decoration = Decorations[0];
+                    Map[i][j].isDecorationOn = true;
+                    Map[i][j].Decoration = Decorations[0];
                 }
             }
         }
