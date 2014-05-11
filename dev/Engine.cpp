@@ -214,14 +214,27 @@ void Engine::MovePlayer(Uint32 deltaTicks) {
     } else Player.y = CurrentY; 
     } else {
        Player.yVel = 100; 
-       for(int i = 0; i <= 20; i++){
-           if(Player.yVel > 0) Player.yVel = Player.yVel - 10;
-           if(Player.yVel < 0) Player.yVel = Player.yVel + 10;
-           Player.y += Player.yVel * (deltaTicks / 1000.f);
-           SDL_Delay(100);
+       for(int i = 0; i <= 18; i++){
+           if(Player.yVel > 0) {
+               Player.y = Player.y - 10;
+               Player.yVel = Player.yVel - 10;
+               cout << "up" << Player.yVel << endl;
+               SDL_Delay(50);
+               SetCamera(Player);
+               Apply_Surface(round(Player.x - camera.x) + 10, round(Player.y - camera.y) + 10, dot, screen, NULL);
+               SDL_Flip(screen);
+               SDL_Delay(50);
+           }
+        /*   if(Player.yVel <= 0) {
+               Player.y = Player.y + 10;
+               cout << "down" << endl;
+               
+           }
+          */ 
+           if(i == 18) Player.onGround = true;
+           
        } 
-       cout << "end" << endl;
-       if(Map[CurrentCellX][CurrentCellY + 1].isBlock) Player.onGround = true;  
+       cout << "end" << endl; 
     }
     if(Player.x != CurrentX || Player.y != CurrentY){
     RenderScene();
