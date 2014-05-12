@@ -67,8 +67,7 @@ void Engine::LoadLevel(){
             for (int j = 0; j < MapSize; j++) {
                 MapFile >> Material >> type1;
                 Map[i][j] = TCellCreate(Materials[FindMaterialID(Material)], type1, false);
-            }
-            
+            }            
         }
          for (int i = 0; i < MapSize; i++) {
             for (int j = 0; j < MapSize; j++) {
@@ -78,11 +77,8 @@ void Engine::LoadLevel(){
                     Map[i][j].isDecorationOn = true;
                     Map[i][j].Decoration = Decorations[0];
                 }
-            
-            
-            }
-            
-            }
+            }           
+        }
     }
 }
 
@@ -153,8 +149,8 @@ int Engine::MainLoop() {
     int frame = 0;
     Timer fps;
     Player = Entity();
-    Player.x = 1000;
-    Player.y = 600;
+    Player.x = 720;
+    Player.y = 440;
     Player.xVel = 0;
     Player.yVel = 0;
     Player.JumpSpeed = 200;
@@ -204,6 +200,7 @@ int Engine::MainLoop() {
             delta.stop();
             delta.start();
             SDL_Flip(screen);
+            if(Player.onGround) cout << "On gr"; else cout << "Not on gr";
             if (fps.get_ticks() < 1000 / FPS) {
                 SDL_Delay((1000 / FPS) - fps.get_ticks());
             }
@@ -218,34 +215,27 @@ void Engine::MovePlayer(Uint32 deltaTicks) {
   
     int CurrentCellX = Player.x / 32;
     int CurrentCellY = Player.y / 32; 
-    cout << CurrentCellX << ":" << CurrentCellY << endl;
-    
     Player.x = Player.x + Player.xVel * (deltaTicks / 1000.f);
+    cout << CurrentCellX << ":" << CurrentCellY << endl;
+    if (Map[CurrentCellX][CurrentCellY + 1].isBlock) Player.onGround = true; else Player.onGround = false;
     if(Player.onGround){ 
         if(Map[CurrentCellX][CurrentCellY + 1].isBlock){ 
         Player.onGround = true;
-        Player.y += Player.yVel * (deltaTicks / 1000.f); 
+        cout << "123";
+        //Player.y += Player.yVel * (deltaTicks / 1000.f); 
+        cout << CurrentCellX << ":" << CurrentCellY << endl;
     } else Player.y = CurrentY; 
     } else {
-       Player.yVel = 100; 
-       for(int i = 0; i <= 18; i++){
-           if(Player.yVel > 0) {
-               Player.y = Player.y - 10;
-               Player.yVel = Player.yVel - 10;
-               cout << "up" << Player.yVel << endl;
-           }
-        /*   if(Player.yVel <= 0) {
-               Player.y = Player.y + 10;
-               cout << "down" << endl;
+        while(!Player.onGround){
+       //     HandleInput();
+         //   Player.x = Player.x + Player.xVel * (deltaTicks / 1000.f);
+               Player.y = Player.y + 15;
                
-           }
-          */   
                SetCamera(Player);
                Apply_Surface(round(Player.x - camera.x) + 10, round(Player.y - camera.y) + 10, dot, screen, NULL);
                SDL_Flip(screen);
-               
-           if(i == 18) Player.onGround = true;
-               SDL_Delay(50); 
+               SDL_Delay(50);
+               if (Map[CurrentCellX][CurrentCellX].isBlock) Player.onGround = true; else Player.onGround = false;
            
        } 
        cout << "end" << endl; 
