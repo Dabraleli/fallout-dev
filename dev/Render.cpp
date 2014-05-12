@@ -32,8 +32,8 @@ void Engine::RenderDecorations() {
         for (int j = LeftTopY; j < RightBotY; j++) {
         int BaseX = (i * 32 + Map[i][j].Decoration.TopTexture->w) - i * 32;
         int BaseY = (j * 32 + Map[i][j].Decoration.TopTexture->h) - j * 32;
-        if(Map[i][j].isDecorationOn && Map[i][j+3].isBlock && !Map[i][j].isBlock){
-            Apply_Surface((0 + Map[i][j].Material.TopTexture->w)*(i - LeftTopX), (0 + Map[i][j].Material.TopTexture->h)*(j - LeftTopY), Map[i][j].Decoration.TopTexture, screen, NULL);
+        if(Map[i][j].isDecorationOn){// && Map[i][j+3].isBlock && !Map[i][j].isBlock){
+            Apply_Surface((0 + Map[i][j].Material.TopTexture->w)*(i - LeftTopX), (0 + Map[i][j].Material.TopTexture->h)*(j - LeftTopY - 1), Map[i][j].Decoration.TopTexture, screen, NULL);
         }  
         }
     }
