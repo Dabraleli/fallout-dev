@@ -1,10 +1,3 @@
-/* 
- * File:   ConfigReader.h
- * Author: dabraleli
- *
- * Created on 10 Май 2014 г., 9:34
- */
-
 #include "ConfigData.h"
 #include "Engine.h"
 
