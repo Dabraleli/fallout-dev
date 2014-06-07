@@ -6,6 +6,10 @@
 #include <math.h>
 #include "ConfigReader.h"
 
+#ifdef _WIN32
+#include <time.h>
+#endif        
+
 using namespace std;
 
 const int PLAYER_WIDTH = 20;
