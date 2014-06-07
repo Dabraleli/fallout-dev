@@ -8,7 +8,7 @@ Linux compile   g++ *.cpp *.h -lSDL -lSDL_image
 #include "SDL/SDL_image.h"
 #include <string>
 #include <iostream>
-
+#include <unistd.h>
 #include "Engine.h"
 
 
@@ -22,6 +22,7 @@ int main( int argc, char* args[] ){
     using namespace std;
     Engine eng; 
     if(SDL_Init(SDL_INIT_EVERYTHING) == 0) cout << "SDL OK" << endl; else cout << "SDL init failed" << endl;
+    cout << "Ti lalka" << endl;
     //if (eng.Fullscreen) eng.screen = SDL_SetVideoMode(960, 600, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
     //else eng.screen = SDL_SetVideoMode(960, 600, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
     eng.screen = SDL_SetVideoMode(1280, 1024, 32, SDL_HWSURFACE  | SDL_DOUBLEBUF);
